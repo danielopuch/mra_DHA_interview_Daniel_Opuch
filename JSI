@@ -18,7 +18,7 @@ The Ministry of Health and Ministry of AGriculture will need to follow these ste
 
 Establishing shared data standards and formats that both ministries will use is the first step. 
 
-Create Application Programming Interfaces (APIs) to allow data sharing between the two ministries' respective IT systems.
+Create Application Programming Interfaces (APIs) to allow data sharing between the two ministries' respective Digital Health systems. Ensur the APIs are rigorously tested with tools like postman.
 
 Because data often exists in different formats and structures within each ministry. Data mapping and transformation capabilities should be included in the interoperability layer to allow for the conversion of shared data from one format to another. This guarantees that data from one ministry can be seamlessly connected with the systems of the other ministry.
 
