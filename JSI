@@ -1,0 +1,188 @@
+MRA - Digital Health Advisor Questions
+
+Instructions
+
+●	Attempt all questions
+●	You must submit your work on the GitHub repository link.
+●	Use DHIS2 instance https://echotst2.jsi.com
+             Username:interviewee
+             Password:Interview2012!
+
+
+Time: 1 hr 30 min
+
+Qn 1.
+The Ministry of Health Uganda and Ministry of Agriculture are developing a strategy to implement data sharing across the two ministries. In their strategy, they are proposing to implement an interoperability layer which will be used to ensure the datasets are synchronized across the ministries. Briefly describe how the interoperability layer will be implemented to ensure common data is shared among the two ministries. (10 marks) 
+
+The Ministry of Health and Ministry of AGriculture will need to follow these stepwise approach inorder to achieve interoperability at both Modular and Semantic level whereby Modular interoperability would enable Ministry of Health and Ministry of agriculture to exchange data at data field level.
+
+Establishing shared data standards and formats that both ministries will use is the first step. 
+
+Create Application Programming Interfaces (APIs) to allow data sharing between the two ministries' respective IT systems.
+
+Because data often exists in different formats and structures within each ministry. Data mapping and transformation capabilities should be included in the interoperability layer to allow for the conversion of shared data from one format to another. This guarantees that data from one ministry can be seamlessly connected with the systems of the other ministry.
+
+Create effective data governance policies to control who can access, use, and share data. Put in place strict security safeguards, such as encryption and access limits, to safeguard the privacy and accuracy of shared data.
+
+Implement data quality checks and validation procedures to guarantee the accuracy and dependability of the shared data. To handle any inconsistencies in the datasets, data cleansing and validation procedures can be included in the interoperability layer.
+
+Implement monitoring and audit mechanisms to track data flows, identify issues, and provide audit trails to  help in troubleshooting problems and ensures transparency in data sharing activities.
+
+ Design the interoperability layer with scalability in mind,  that it is flexible enough to accommodate changes in data structures and operational processes within each ministry.
+To make sure that data sharing methods function as intended, carry out extensive testing and validation prior to full-scale adoption. Deal with any problems or obstructions found during testing.
+
+Staff from both ministries should receive training on how to use the interoperability layer correctly and follow the rules for data sharing. The best practices for data privacy and security are also being taught to the workers.
+
+The whole interoperability layer configuration, including data standards, APIs, and procedures, should be documented. Create a maintenance schedule to upgrade and improve the interoperability layer as required and must be continually updated with any changes in the layer.
+Also both Ministries need to agree moving forward on new Data elements and scale-up timeline to avoid disruption.
+
+Qn 2:
+Write an DHIS2 SQL view to retrieve aggregated data from a DHIS2 instance. The minimum columns required are organisationunit uid, organisationunit name, data element uid, data element name, periodid, value, category option combo name, category option combo uid.
+The data must be sorted in ascending order by organisation name and periodid. (5 marks)
+
+SELECT
+    ou.uid AS "organisationunit uid",
+    ou.name AS "organisationunit name",
+    de.uid AS "data element uid",
+    de.name AS "data element name",
+    dv.periodid,
+    dv.value,
+    coc.name AS "category option combo name",
+    coc.uid AS "category option combo uid"
+FROM
+    dataelementvalue dv
+JOIN
+    organisationunit ou ON dv.sourceid = ou.organisationunitid
+JOIN
+    dataelement de ON dv.dataelementid = de.dataelementid
+JOIN
+    categoryoptioncombo coc ON dv.categoryoptioncomboid = coc.categoryoptioncomboid
+ORDER BY
+    "organisationunit name" ASC,
+    dv.periodid ASC;
+
+Qn 3:
+Given a data collection below, design an exact dataset in the DHIS2 instance provided. All metadata must be pre-appended with your first name. (15 marks)
+
+
+Indicator Name	Indicator code	Diesel	Petrol
+		Fuso	Tata	Benz	BMW
+Number of tyres	TRCAR001				
+Number of doors	TRCAR003				
+
+
+Use these steps
+//Using daniel_ for meta data
+
+a. **Create Data Elements:**
+   - Data Element 1: Daniel Number of Tyres
+     - Code: daniel_TRCAR001
+   - Data Element 2: Daniel Number of Doors
+     - Code: daniel_TRCAR003
+
+b. **Create Categories:**
+   - Category 1: Diesel
+   - Category 2: Petrol
+
+c. **Create Category Options:**
+   - For Diesel:
+     - Category Option 1: Fuso
+     - Category Option 2: Tata
+   - For Petrol:
+     - Category Option 3: Benz
+     - Category Option 4: BMW
+
+d **Create a Category Combination:**
+   - Name: Daniel Fuel Type
+   - Include the Diesel and Petrol categories in this combination.
+
+e. **Create a Data Set:**
+   - Name: Daniel Car Data
+   - Period Type: Monthly (or your preferred period type)
+   - Data Entry Form: Optional, based on your needs.
+
+f. **Add Data Elements to the Data Set:**
+   - Add "Daniel Number of Tyres" and "Daniel Number of Doors" to the data set.
+
+
+h. **Create Data Set Category Choices:**
+   - Name: Daniel Car Data Categories
+   - Assign the "Daniel Fuel Type" category combination to this data set category combo.
+
+i. **Assign Data Elements to Category Options:**
+   - For each Data Element (daniel Number of Tyres and daniel Number of Doors), assign the appropriate category options based on  Diesel or Petrol.
+
+
+10. **Assign the Data Set to Organizational Units:**
+    - Assign the "Daniel Car Data" data set to the relevant organizational units where data will be collected.
+
+
+Qn 4:
+Write a function using any web programming language of your choice to dynamically assign  the value of firstName to a field called fullName given data of the following structure. (10 marks)
+
+{
+     "users": [
+    {
+      "id": "1",
+      "firstName": "admin2",
+      "name": "admin2 admin"
+    },
+    {
+      "id": "2",
+      "firstName": "admin2",
+      "name": "admin admin"
+    },
+    {
+      "id": "3",
+      "firstName": "Demo",
+      "name": "Demo Tracker"
+    }
+]
+}
+
+
+
+
+//using JavaScript (JS).
+
+function assignFullName(data) {
+
+// Iterate through the users array
+  data.users.forEach(function(user) {
+// Assign the value of 'firstName' to 'fullName'
+    user.fullName = user.firstName;
+  });
+ // Return the updated data structure
+  return data;
+}
+
+// smaple data structure
+var data = {
+  "users": [
+    {
+      "id": "1",
+      "firstName": "admin2",
+      "name": "admin2 admin"
+    },
+    {
+      "id": "2",
+      "firstName": "admin2",
+      "name": "admin admin"
+    },
+    {
+      "id": "3",
+      "firstName": "Demo",
+      "name": "Demo Tracker"
+    }
+  ]
+};
+
+// Call the function to assign 'firstName' to 'fulName'
+var updatedData = assignFullName(data);
+
+// Print the updated data structure
+console.log(updatedData);
+
+//end of code.
+
+
